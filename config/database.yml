@@ -19,7 +19,7 @@ default: &default
 
 development:
   <<: *default
-  database: aboard
+  database: aboard_dev
   password: <%= ENV['ABOARD_DATABASE_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and

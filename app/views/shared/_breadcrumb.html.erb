@@ -1,0 +1,12 @@
+<div>
+
+  <span><a href="/forums/">Forums</a></span>
+  <% if !@parent_forum.nil? %>
+    <span>/</span>
+    <span><a href="/forums/<%= @parent_forum.forum_id %>"><%= @parent_forum.forum_nm %></a></span>
+  <% end %>
+  <% if !@current_forum.nil? %>
+    <span>/</span>
+    <span><a href="/forums/<%= @current_forum.forum_id %>"><%= @current_forum.forum_nm %></a></span>
+  <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2018_09_02_125517) do
 
   create_table "forums", primary_key: "forum_id", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "forum_nm", limit: 1000, null: false
@@ -18,13 +18,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "create_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
-  create_table "thread_replies", primary_key: ["trd_id", "rep_trd_id"], options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "trd_id", null: false
-    t.integer "rep_trd_id", null: false
-    t.integer "lvl", default: 1, null: false
-  end
-
-  create_table "threads", primary_key: "trd_id", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "posts", primary_key: "post_id", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "forum_id", null: false
     t.string "title", limit: 1000, null: false
     t.string "content", limit: 4000, null: false
@@ -32,6 +26,16 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "write_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "modify_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "close_dttm"
+  end
+
+  create_table "replies", primary_key: "reply_id", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "quote_reply_id"
+    t.integer "lvl", default: 1, null: false
+    t.string "user_id", limit: 15, null: false
+    t.string "content", limit: 4000, null: false
+    t.datetime "write_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "modify_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
 end

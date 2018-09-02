@@ -1,13 +1,11 @@
+<% if @forums.length > 0 %>
+<!--サブカテゴリ-->
 <div>
-  <p><%= @parentForum.forum_nm %></p>
-</div>
-<div>
-  <% if @haveSub > 0 %>
   <table>
     <thead>
     <tr>
       <th>Category</th>
-      <th>Thread Count</th>
+      <th>Threads</th>
       <th>Create Date</th>
     </tr>
     </thead>
@@ -15,11 +13,46 @@
     <% @forums.each do |forum| %>
       <tr>
         <td><%= link_to forum.forum_nm, forum_path(id: forum.forum_id) %></td>
-        <td></td>
+        <td><%= forum.count_all ||= 0 %></td>
         <td><%= forum.create_dttm %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
-  <% end %>
+</div>
+<hr>
+<% end %>
+<div>
+  <%#= form_tag(new_post_path, method: "get") do %>
+    <%#= hidden_field_tag "forum_id", @parent_forum.forum_id %>
+    <%#= submit_tag('スレッド作成') %>
+  <%# end %>
+  <form action="/posts/new" method="get">
+    <input type="hidden" name="forum_id" id="forum_id" value="<%= @current_forum.forum_id %>">
+    <input type="submit" value="スレッド作成">
+  </form>
+</div>
+
+<!--スレッドリスト-->
+<div>
+  <table class="thread_list">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Replies</th>
+      <th>Recently post</th>
+      <th>Post date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @posts.each do |post| %>
+    <tr>
+      <td><%= link_to post.title, post_path(post.post_id) %></td>
+      <td></td>
+      <td></td>
+      <td><%= post.write_dttm %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>

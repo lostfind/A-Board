@@ -1,0 +1,63 @@
+<div>
+  <%= form_for @reply do |reply_form| %>
+    <%= reply_form.hidden_field :post_id, :value => (@post.post_id) %>
+    <div>
+      <%= reply_form.label :user_id %>
+      <%= reply_form.text_field :user_id %>
+    </div>
+    <div>
+      <%= reply_form.label :content %>
+      <%= reply_form.text_area :content %>
+    </div>
+    <div>
+      <%= reply_form.submit "Create" %>
+    </div>
+  <% end %>
+</div>
+
+<div id="post_list">
+  <ol id="posts" start="1">
+    <li>
+      <div class="post_head">
+        <div class="post_title">
+          <span><%= @post.title %></span>
+        </div>
+        <div class="post_date">
+          <span><%= @post.write_dttm %></span>
+        </div>
+<!--        <div class="post_time">-->
+<!--          <span><%#= @post.write_dttm %></span>-->
+<!--        </div>-->
+      </div>
+      <div class="post_body">
+        <div class="post_content">
+          <%= @post.content %>
+        </div>
+        <div class="post_user">
+          <span><%= @post.post_user_id %></span>
+        </div>
+      </div>
+    </li>
+    <!-- Reply -->
+    <% @replies.each do |reply| %>
+      <li>
+        <div class="post_head">
+          <div class="post_date">
+            <span><%= reply.write_dttm %></span>
+          </div>
+<!--          <div class="post_time">-->
+<!--            <span><%#= reply.write_dttm %></span>-->
+<!--          </div>-->
+        </div>
+        <div class="post_body">
+          <div class="post_content">
+            <%= reply.content %>
+          </div>
+          <div class="post_user">
+            <span><%= reply.user_id %></span>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+</div>

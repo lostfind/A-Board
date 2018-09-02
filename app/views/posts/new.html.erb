@@ -1,0 +1,28 @@
+<div>
+  <%= form_for @post do |post_form| %>
+    <%= post_form.hidden_field :post_id, :value => (params[:post_id]) %>
+    <div>
+      <%= post_form.label :post_user_id %>
+      <%= post_form.text_field :post_user_id %>
+    </div>
+
+    <div>
+      <%= post_form.label :title %>
+      <%= post_form.text_field :title %>
+    </div>
+
+    <div>
+      <%= post_form.label :content %>
+      <%= post_form.text_area :content %>
+    </div>
+
+    <div>
+      <%= post_form.label :close_dttm %>
+      <input type="date" name="post[close_dttm]" id="post_close_dttm" >
+    </div>
+
+    <div>
+      <%= post_form.submit "Create" %>
+    </div>
+  <% end %>
+</div>
