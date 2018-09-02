@@ -1,0 +1,25 @@
+<div>
+  <p><%= @parentForum.forum_nm %></p>
+</div>
+<div>
+  <% if @haveSub > 0 %>
+  <table>
+    <thead>
+    <tr>
+      <th>Category</th>
+      <th>Thread Count</th>
+      <th>Create Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @forums.each do |forum| %>
+      <tr>
+        <td><%= link_to forum.forum_nm, forum_path(id: forum.forum_id) %></td>
+        <td></td>
+        <td><%= forum.create_dttm %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>
