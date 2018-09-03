@@ -1,63 +1,60 @@
-<div>
-  <%= form_for @reply do |reply_form| %>
-    <%= reply_form.hidden_field :post_id, :value => (@post.post_id) %>
-    <div>
-      <%= reply_form.label :user_id %>
-      <%= reply_form.text_field :user_id %>
+<div class="create">
+  <div class="container">
+    <div class="form_title">
+      <p>コメント作成</p>
     </div>
-    <div>
-      <%= reply_form.label :content %>
-      <%= reply_form.text_area :content %>
-    </div>
-    <div>
-      <%= reply_form.submit "Create" %>
-    </div>
-  <% end %>
+    <%= form_for @reply do |f| %>
+      <%= f.hidden_field :post_id, :value => (@post.post_id) %>
+      <div class="field">
+        <%= f.label "名前" %>
+        <%= f.text_field :user_id %>
+      </div>
+      <div class="field">
+        <%= f.label "コメント" %>
+        <%= f.text_area :content, class: "" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "作成" %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<div id="post_list">
-  <ol id="posts" start="1">
-    <li>
-      <div class="post_head">
-        <div class="post_title">
-          <span><%= @post.title %></span>
-        </div>
-        <div class="post_date">
-          <span><%= @post.write_dttm %></span>
-        </div>
-<!--        <div class="post_time">-->
-<!--          <span><%#= @post.write_dttm %></span>-->
-<!--        </div>-->
-      </div>
-      <div class="post_body">
-        <div class="post_content">
-          <%= @post.content %>
-        </div>
-        <div class="post_user">
-          <span><%= @post.post_user_id %></span>
-        </div>
-      </div>
-    </li>
-    <!-- Reply -->
-    <% @replies.each do |reply| %>
-      <li>
-        <div class="post_head">
-          <div class="post_date">
-            <span><%= reply.write_dttm %></span>
+<div class="messages">
+  <div class="container">
+    <div id="post_list">
+      <ol id="posts" start="1">
+        <li>
+          <div class="message">
+            <div class="post_head">
+              <p class="title"><%= @post.title %></p>
+            </div>
+            <div class="post_body">
+              <p class="content"><%= @post.content %></p>
+            </div>
+            <div class="post_foot">
+              <span class="user"><%= @post.post_user_id %></span>
+              <span class="time"><%= @post.write_dttm %></span>
+            </div>
           </div>
-<!--          <div class="post_time">-->
-<!--            <span><%#= reply.write_dttm %></span>-->
-<!--          </div>-->
-        </div>
-        <div class="post_body">
-          <div class="post_content">
-            <%= reply.content %>
-          </div>
-          <div class="post_user">
-            <span><%= reply.user_id %></span>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ol>
+        </li>
+        <!-- Reply -->
+        <% @replies.each do |reply| %>
+          <li>
+            <div class="message">
+              <div class="post_head">
+              </div>
+              <div class="post_body">
+                <p class="content"><%= reply.content %></p>
+              </div>
+              <div class="post_foot">
+                <span class="user"><%= reply.user_id %></span>
+                <span class="time"><%= reply.write_dttm %></span>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
 </div>

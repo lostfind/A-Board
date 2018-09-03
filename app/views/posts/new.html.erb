@@ -1,28 +1,33 @@
-<div>
-  <%= form_for @post do |post_form| %>
-    <%= post_form.hidden_field :post_id, :value => (params[:post_id]) %>
-    <div>
-      <%= post_form.label :post_user_id %>
-      <%= post_form.text_field :post_user_id %>
+<div class="create">
+  <div class="container">
+    <div class="form_title">
+      <p>スレッド作成</p>
     </div>
+    <%= form_for @post do |post_form| %>
+      <%= post_form.hidden_field :post_id, :value => (params[:post_id]) %>
+      <div class="field">
+        <%= post_form.label "名前" %>
+        <%= post_form.text_field :post_user_id %>
+      </div>
 
-    <div>
-      <%= post_form.label :title %>
-      <%= post_form.text_field :title %>
-    </div>
+      <div class="field">
+        <%= post_form.label "タイトル" %>
+        <%= post_form.text_field :title %>
+      </div>
 
-    <div>
-      <%= post_form.label :content %>
-      <%= post_form.text_area :content %>
-    </div>
+      <div class="field">
+        <%= post_form.label :content %>
+        <%= post_form.text_area :content %>
+      </div>
 
-    <div>
-      <%= post_form.label :close_dttm %>
-      <input type="date" name="post[close_dttm]" id="post_close_dttm" >
-    </div>
+      <div class="field">
+        <%= post_form.label "締切日" %>
+        <input type="date" name="post[close_dttm]" id="post_close_dttm" >
+      </div>
 
-    <div>
-      <%= post_form.submit "Create" %>
-    </div>
-  <% end %>
+      <div class="actions">
+        <%= post_form.submit "作成" %>
+      </div>
+    <% end %>
+  </div>
 </div>

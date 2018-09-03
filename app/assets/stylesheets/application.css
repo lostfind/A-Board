@@ -17,3 +17,107 @@
 .thread_list, table, th, td {
     border: 1px solid black;
 }
+
+html, body, p {
+    margin: 0;
+}
+
+body {
+    background-color: #eee;
+    font-family: 'Roboto', sans-serif;
+}
+
+ol {
+    list-style: none;
+    padding: 0px;
+}
+
+.container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.messages, .create {
+    margin: 40px 0;
+}
+
+.messages a,
+.create .actions input {
+    background-color: #f2580b;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 12px 24px;
+    transition: background-color 0.5s;
+    text-decoration: none;
+    display: inline-block;
+}
+.create .field {
+    margin-bottom: 11px;
+}
+
+.content {
+    white-space: pre-line;
+}
+
+.message {
+    background-color: #fff;
+    font-weight: 300;
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.post_head {
+    margin-bottom: 10px;
+}
+.post_foot {
+    margin-top: 12px;
+}
+
+p.title {
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+span.user:before {
+    content: "By ";
+}
+span.user:after {
+    content: ", ";
+}
+span.user {
+    color: #0084d7;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+span.time {
+    color: #0084d7;
+    font-size: 12px;
+}
+
+form label {
+    display: block;
+    width: 100%;
+}
+
+form textarea {
+    border: 1px solid transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    min-height: 100px;
+    padding: 16px;
+    transition: border 0.5s;
+    width: calc(100% - 32px);
+    resize: none;
+}
+
+form textarea:focus {
+    border: 1px solid #0084d7;
+    outline: 0px;
+    transition: border 0.5s;
+}

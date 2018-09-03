@@ -1,4 +1,5 @@
 class Forum < ApplicationRecord
+  has_many :posts
   def self.main_list
     forums = Forum.joins(
       "LEFT OUTER JOIN (SELECT COUNT(*) AS count_all, `posts`.`forum_id` AS posts_forum_id FROM `posts` GROUP BY `posts`.`forum_id`) posts
