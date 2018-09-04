@@ -41,7 +41,7 @@ ol {
     margin: 40px 0;
 }
 
-.messages a,
+/*.messages a,*/
 .create .actions input {
     background-color: #f2580b;
     border: none;
@@ -74,6 +74,10 @@ ol {
 }
 .post_foot {
     margin-top: 12px;
+}
+
+.post_control {
+    text-align: right;
 }
 
 p.title {

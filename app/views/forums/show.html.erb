@@ -24,7 +24,7 @@
 <% end %>
 <div>
   <%#= form_tag(new_post_path, method: "get") do %>
-    <%#= hidden_field_tag "forum_id", @parent_forum.forum_id %>
+    <%#= hidden_field_tag "forum_id", @current_forum.forum_id %>
     <%#= submit_tag('スレッド作成') %>
   <%# end %>
   <form action="/posts/new" method="get">
