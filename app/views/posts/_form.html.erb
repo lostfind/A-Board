@@ -1,0 +1,33 @@
+<div class="create">
+  <div class="container">
+    <div class="form_title">
+      <p>スレッド作成</p>
+    </div>
+    <%= form_for @post do |post_form| %>
+      <%= post_form.hidden_field :forum_id, :value => (@post.forum_id ||= params[:forum_id]) %>
+      <div class="field">
+        <%= post_form.label "名前" %>
+        <%= post_form.text_field :post_user_id %>
+      </div>
+
+      <div class="field">
+        <%= post_form.label "タイトル" %>
+        <%= post_form.text_field :title %>
+      </div>
+
+      <div class="field">
+        <%= post_form.label :content %>
+        <%= post_form.text_area :content %>
+      </div>
+
+      <div class="field">
+        <%= post_form.label "締切日" %>
+        <input type="date" name="post[close_dttm]" id="post_close_dttm" >
+      </div>
+
+      <div class="actions">
+        <%= post_form.submit local_assigns[:submit] %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,24 +1,4 @@
-<div class="create">
-  <div class="container">
-    <div class="form_title">
-      <p>コメント作成</p>
-    </div>
-    <%= form_for @reply do |f| %>
-      <%= f.hidden_field :post_id, :value => (@post.post_id) %>
-      <div class="field">
-        <%= f.label "名前" %>
-        <%= f.text_field :user_id %>
-      </div>
-      <div class="field">
-        <%= f.label "コメント" %>
-        <%= f.text_area :content, class: "" %>
-      </div>
-      <div class="actions">
-        <%= f.submit "作成" %>
-      </div>
-    <% end %>
-  </div>
-</div>
+<%= render '/replies/form', summit: "作成" %>
 
 <div class="messages">
   <div class="container">
