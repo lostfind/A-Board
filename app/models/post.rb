@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
+  validates :title, presence: true
   belongs_to :forum
   has_many :replies
+
   def forum_posts(forum_id)
     # @posts = Post.where("forum_id = ?", forum_id)
     @posts = Post.find_by_sql ["SELECT
@@ -20,5 +22,17 @@ class Post < ApplicationRecord
       WHERE p.forum_id = ?", forum_id]
 
     return @posts
+  end
+
+  def valid_password?(password)
+    if Digest::MD5.hexdigest(password) == self.password
+      return true
+    else
+      return false
+    end
+  end
+
+  def encryption
+    self.password = Digest::MD5.hexdigest(self.password)
   end
 end

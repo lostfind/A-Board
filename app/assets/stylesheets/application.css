@@ -62,21 +62,36 @@ ol {
     white-space: pre-line;
 }
 
-.message {
+.post_message {
+    background-color: #fff;
+    font-weight: 300;
+    padding: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #9a9a9a;
+}
+
+.reply_message {
     background-color: #fff;
     font-weight: 300;
     padding: 16px;
     margin-bottom: 10px;
 }
 
-.post_head {
+.post_head, .reply_head {
     margin-bottom: 10px;
 }
+
 .post_foot {
     margin-top: 12px;
+    color: #0084d7;
 }
 
-.post_control {
+.reply_foot {
+    margin-top: 10px;
+    color: #d70000;
+}
+
+.post_control, .reply_control {
     text-align: right;
 }
 
@@ -93,13 +108,12 @@ span.user:after {
     content: ", ";
 }
 span.user {
-    color: #0084d7;
     font-size: 12px;
     font-weight: bold;
 }
 
 span.time {
-    color: #0084d7;
+
     font-size: 12px;
 }
 

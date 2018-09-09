@@ -9,9 +9,10 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.encryption
     respond_to do |format|
       if @post.save
-        format.html { redirect_to forum_path(id: @post.forum_id), notice: 'Thread Posted!'}
+        format.html { redirect_to forum_path(id: @post.forum_id), notice: "スレッド作成完了"}
       else
         format.html { render :new }
       end
@@ -31,9 +32,12 @@ class PostsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to post_path(@post.post_id) }
+      if @post.valid_password?(post_params[:password])
+        if @post.update(update_params)
+          format.html { redirect_to post_path(@post.post_id), notice: "スレッドが更新できました。" }
+        end
       else
+        flash.now[:error] = "passwords is not correct"
         format.html { render :edit }
       end
     end
@@ -42,7 +46,7 @@ class PostsController < ApplicationController
   def destroy
     respond_to do |format|
       if @post.destroy
-        format.html { redirect_to forum_path(@post.forum_id) }
+        format.html { redirect_to forum_path(@post.forum_id), notice: "スレッドが削除されました。" }
       else
         format.html { render :show }
       end
@@ -55,6 +59,10 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:forum_id, :title, :content, :post_user_id, :close_dttm)
+    params.require(:post).permit(:forum_id, :title, :content, :post_user_id, :password, :close_dttm)
+  end
+
+  def update_params
+    params.require(:post).permit(:title, :content, :post_user_id, :close_dttm)
   end
 end

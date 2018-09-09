@@ -4,15 +4,17 @@
   <table>
     <thead>
     <tr>
-      <th>Category</th>
-      <th>Threads</th>
-      <th>Create Date</th>
+      <th>フォーラム</th>
+      <th>詳細説明</th>
+      <th>スレッド数</th>
+      <th>作成日時</th>
     </tr>
     </thead>
     <tbody>
     <% @forums.each do |forum| %>
       <tr>
         <td><%= link_to forum.forum_nm, forum_path(id: forum.forum_id) %></td>
+        <td><%= forum.detail %></td>
         <td><%= forum.count_all %></td>
         <td><%= forum.create_dttm %></td>
       </tr>

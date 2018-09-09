@@ -1,11 +1,9 @@
-<%= render '/replies/form', summit: "作成" %>
-
 <div class="messages">
   <div class="container">
     <div id="post_list">
       <ol id="posts" start="1">
         <li>
-          <div class="message">
+          <div class="post_message">
             <div class="post_head">
               <p class="title"><%= @post.title %></p>
             </div>
@@ -25,17 +23,17 @@
         <!-- Reply -->
         <% @replies.each do |reply| %>
           <li>
-            <div class="message">
+            <div class="reply_message">
               <div class="post_head">
               </div>
-              <div class="post_body">
+              <div class="reply_body">
                 <p class="content"><%= reply.content %></p>
               </div>
-              <div class="post_foot">
+              <div class="reply_foot">
                 <span class="user"><%= reply.user_id %></span>
                 <span class="time"><%= reply.write_dttm %></span>
               </div>
-              <div class="post_control">
+              <div class="reply_control">
                 <span class="left-box">
                   <%= link_to "削除", reply, method: :delete, data: { confirm: 'コメントを削除しますか。' } %>
                 </span>
@@ -50,3 +48,7 @@
     </div>
   </div>
 </div>
+
+<!--TODO comment paging -->
+<hr>
+<%= render '/replies/form', submit: "作成" %>

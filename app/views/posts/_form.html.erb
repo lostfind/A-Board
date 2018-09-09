@@ -4,10 +4,25 @@
       <p>スレッド作成</p>
     </div>
     <%= form_for @post do |post_form| %>
+      <% if @post.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%= post_form.hidden_field :forum_id, :value => (@post.forum_id ||= params[:forum_id]) %>
       <div class="field">
         <%= post_form.label "名前" %>
         <%= post_form.text_field :post_user_id %>
+      </div>
+
+      <div class="field">
+        <%= post_form.label "パスワード" %>
+        <%= post_form.password_field :password %>
       </div>
 
       <div class="field">
@@ -27,6 +42,7 @@
 
       <div class="actions">
         <%= post_form.submit local_assigns[:submit] %>
+        <input type="button" value="キャンセル" onclick="history.back()">
       </div>
     <% end %>
   </div>
