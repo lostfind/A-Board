@@ -3,15 +3,11 @@ class RepliesController < ApplicationController
 
   def create
     @reply = Reply.new(reply_params)
-
-    unless @reply.content.to_s.length == 0
-      respond_to do |format|
-        if @reply.save
-          format.html { redirect_to post_path(id: @reply.post_id), notice: 'Reply Posted!' }
-        else
-          format.html { redirect_to post_path(id: @reply.post_id) }
-        end
-      end
+    @reply.encryption
+    if @reply.save
+      redirect_to post_path(id: @reply.post_id), notice: 'Reply Posted!'
+    else
+      redirect_to post_path(id: @reply.post_id)
     end
   end
 
@@ -19,13 +15,13 @@ class RepliesController < ApplicationController
   end
 
   def update
-    @reply.modify_dttm =
-    respond_to do |format|
+    if @reply.valid_password?(reply_params[:password])
       if @reply.update(reply_params)
-        format.html { redirect_to post_path(@reply.post_id) }
-      else
-        format.html { render :edit }
+        redirect_to post_path(@reply.post_id)
       end
+    else
+      flash.now[:error] = "passwords is not correct"
+      render :edit
     end
   end
 
@@ -42,6 +38,10 @@ class RepliesController < ApplicationController
   end
 
   def reply_params
-    params.require(:reply).permit(:post_id, :content, :user_id, :quote_reply_id, :lvl)
+    params.require(:reply).permit(:post_id, :content, :user_id, :password, :quote_reply_id, :lvl)
+  end
+
+  def update_params
+    params.require(:reply).permit(:content, :user_id)
   end
 end

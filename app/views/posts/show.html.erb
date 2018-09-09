@@ -14,9 +14,13 @@
               <span class="user"><%= @post.post_user_id %></span>
               <span class="time"><%= @post.write_dttm %></span>
             </div>
-            <div class="post_control">
-              <%= link_to "スレッド削除", @post, method: :delete, data: { confirm: 'スレッドを削除しますか。' } %>
-              <%= link_to "編集", edit_post_path(@post) %>
+            <div class="post-control">
+              <span class="control-item">
+                <%= link_to "スレッド削除", @post, method: :delete, data: { confirm: 'スレッドを削除しますか。' } %>
+              </span>
+              <span class="control-item">
+                <%= link_to "編集", edit_post_path(@post) %>
+              </span>
             </div>
           </div>
         </li>
@@ -33,11 +37,11 @@
                 <span class="user"><%= reply.user_id %></span>
                 <span class="time"><%= reply.write_dttm %></span>
               </div>
-              <div class="reply_control">
-                <span class="left-box">
+              <div class="reply-control">
+                <span class="control-item">
                   <%= link_to "削除", reply, method: :delete, data: { confirm: 'コメントを削除しますか。' } %>
                 </span>
-                <span class="right-box">
+                <span class="control-item">
                   <%= link_to "編集", edit_reply_path(reply.reply_id) %>
                 </span>
               </div>

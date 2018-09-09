@@ -31,25 +31,21 @@ class PostsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @post.valid_password?(post_params[:password])
-        if @post.update(update_params)
-          format.html { redirect_to post_path(@post.post_id), notice: "スレッドが更新できました。" }
-        end
-      else
-        flash.now[:error] = "passwords is not correct"
-        format.html { render :edit }
+    if @post.valid_password?(post_params[:password])
+      if @post.update(update_params)
+        redirect_to post_path(@post.post_id), notice: "スレッドが更新できました。"
       end
+    else
+      flash.now[:error] = "passwords is not correct"
+      render :edit, post: @post
     end
   end
 
   def destroy
-    respond_to do |format|
-      if @post.destroy
-        format.html { redirect_to forum_path(@post.forum_id), notice: "スレッドが削除されました。" }
-      else
-        format.html { render :show }
-      end
+    if @post.destroy
+      redirect_to forum_path(@post.forum_id), notice: "スレッドが削除されました。"
+    else
+      render :show
     end
   end
 

@@ -1,7 +1,7 @@
 <% if @forums.length > 0 %>
 <!--サブカテゴリ-->
-<div>
-  <table>
+<div class="container">
+  <table class="list">
     <thead>
     <tr>
       <th>フォーラム</th>
@@ -24,20 +24,14 @@
 </div>
 <hr>
 <% end %>
-<div>
-  <%#= form_tag(new_post_path, method: "get") do %>
-    <%#= hidden_field_tag "forum_id", @current_forum.forum_id %>
-    <%#= submit_tag('スレッド作成') %>
-  <%# end %>
-  <form action="/posts/new" method="get">
-    <input type="hidden" name="forum_id" id="forum_id" value="<%= @current_forum.forum_id %>">
-    <input type="submit" value="スレッド作成">
-  </form>
+
+<div class="container">
+  <a href="/posts/new?forum_id=<%= @current_forum.forum_id %>">スレッド作成</a>
 </div>
 
 <!--スレッドリスト-->
-<div>
-  <table class="thread_list">
+<div class="container">
+  <table class="list">
     <thead>
     <tr>
       <th>タイトル</th>

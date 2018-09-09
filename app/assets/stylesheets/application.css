@@ -14,17 +14,34 @@
  *= require_self
  */
 
-.thread_list, table, th, td {
-    border: 1px solid black;
+a, a:link, a:visited {
+    text-decoration: none;
+    color: #f2580b;
+}
+
+a:hover { text-decoration: underline; }
+
+table.list {
+    width: 100%;
+    border: 1px solid #CCC;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    text-align: left;
+}
+
+table.list, th, td {
+    border-bottom: 1px solid #CCC;
+    padding: 2px;
 }
 
 html, body, p {
-    margin: 0;
+    margin: 0 auto;
 }
 
 body {
     background-color: #eee;
     font-family: 'Roboto', sans-serif;
+    width: 70%;
 }
 
 ol {
@@ -32,16 +49,14 @@ ol {
     padding: 0px;
 }
 
+.navigation {
+    font-size: 20px;
+    margin: 5px auto auto;
+}
 .container {
-    width: 70%;
     margin: 0 auto;
 }
 
-.messages, .create {
-    margin: 40px 0;
-}
-
-/*.messages a,*/
 .create .actions input {
     background-color: #f2580b;
     border: none;
@@ -86,12 +101,21 @@ ol {
     color: #0084d7;
 }
 
+.control-item:before {
+    content: " | ";
+}
+
+.control-item:first-child:before {
+    content: "";
+}
+
+
 .reply_foot {
     margin-top: 10px;
     color: #d70000;
 }
 
-.post_control, .reply_control {
+.post-control, .reply-control {
     text-align: right;
 }
 
@@ -131,7 +155,7 @@ form textarea {
     padding: 16px;
     transition: border 0.5s;
     width: calc(100% - 32px);
-    resize: none;
+    resize: vertical;
 }
 
 form textarea:focus {
