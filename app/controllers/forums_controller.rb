@@ -7,7 +7,7 @@ class ForumsController < ApplicationController
     @current_forum = Forum.find_by_forum_id(params[:id])
     @parent_forum = Forum.find_by_forum_id(@current_forum.parent_forum_id)
     @forums = Forum.sub_list(params[:id])
-    @posts = Post.forum_posts(params[:id])
+    @posts = Post.new.forum_posts(params[:id])
 
     respond_to do |format|
       format.html

@@ -19,6 +19,7 @@ class RepliesController < ApplicationController
   end
 
   def update
+    @reply.modify_dttm =
     respond_to do |format|
       if @reply.update(reply_params)
         format.html { redirect_to post_path(@reply.post_id) }

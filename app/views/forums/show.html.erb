@@ -13,7 +13,7 @@
     <% @forums.each do |forum| %>
       <tr>
         <td><%= link_to forum.forum_nm, forum_path(id: forum.forum_id) %></td>
-        <td><%= forum.count_all ||= 0 %></td>
+        <td><%= forum.count_all %></td>
         <td><%= forum.create_dttm %></td>
       </tr>
     <% end %>
@@ -38,18 +38,18 @@
   <table class="thread_list">
     <thead>
     <tr>
-      <th>Title</th>
-      <th>Replies</th>
-      <th>Recently post</th>
-      <th>Post date</th>
+      <th>タイトル</th>
+      <th>コメント</th>
+      <th>最新の投稿</th>
+      <th>作成日時</th>
     </tr>
     </thead>
     <tbody>
     <% @posts.each do |post| %>
     <tr>
       <td><%= link_to post.title, post_path(post.post_id) %></td>
-      <td></td>
-      <td></td>
+      <td><%= post.r_cnt %></td>
+      <td><%= post.recent_dttm %></td>
       <td><%= post.write_dttm %></td>
     </tr>
     <% end %>
