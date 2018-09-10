@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   def show
     @current_forum = Forum.find_by_forum_id(@post.forum_id)
     @parent_forum = Forum.find_by_forum_id(@current_forum.parent_forum_id)
-    @replies = Reply.reply_list(@post.post_id)
+    @replies = Reply.reply_list(@post.post_id).page params[:page]
     @reply = Reply.new
     @reply.post_id = @post.post_id
   end

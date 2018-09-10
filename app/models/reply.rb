@@ -1,4 +1,5 @@
 class Reply < ApplicationRecord
+  paginates_per 10
   validates :content, presence: true
   belongs_to :post
   def self.reply_list(post_id)
