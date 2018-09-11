@@ -5,6 +5,7 @@
     </div>
     <%= form_for @reply do |f| %>
       <%= f.hidden_field :post_id %>
+      <%= f.hidden_field :quote_reply_id %>
       <div class="field">
         <%= f.label "名前" %>
         <%= f.text_field :user_id %>

@@ -26,10 +26,15 @@ class RepliesController < ApplicationController
   end
 
   def destroy
-    respond_to do |format|
-      @reply.destroy
-      format.html { redirect_to post_path(@reply.post_id) }
-    end
+    @reply.destroy
+    redirect_to post_path(@reply.post_id)
+  end
+
+  def quote
+    @reply = Reply.new
+    @quote = Reply.find(params[:id])
+    @reply.quote_reply_id = params[:id]
+    @reply.post_id = @quote.post_id
   end
 
   private

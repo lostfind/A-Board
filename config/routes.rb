@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :forums
   resources :posts
   resources :replies
+
+  get '/quotes/:id', to: 'replies#quote'
 end

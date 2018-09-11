@@ -16,10 +16,10 @@
             </div>
             <div class="post-control">
               <span class="control-item">
-                <%= link_to "スレッド削除", @post, method: :delete, data: { confirm: 'スレッドを削除しますか。' } %>
+                <%= link_to 'スレッド削除', @post, method: :delete, data: { confirm: 'スレッドを削除しますか。' } %>
               </span>
               <span class="control-item">
-                <%= link_to "編集", edit_post_path(@post) %>
+                <%= link_to '編集', edit_post_path(@post) %>
               </span>
             </div>
           </div>
@@ -31,6 +31,8 @@
               <div class="post_head">
               </div>
               <div class="reply_body">
+<!--                TODO コメント内容表示-->
+                <p class="quote"><%= reply.quote_reply_id %></p>
                 <p class="content"><%= reply.content %></p>
               </div>
               <div class="reply_foot">
@@ -39,10 +41,13 @@
               </div>
               <div class="reply-control">
                 <span class="control-item">
-                  <%= link_to "削除", reply, method: :delete, data: { confirm: 'コメントを削除しますか。' } %>
+                  <%= link_to '削除', reply, method: :delete, data: { confirm: 'コメントを削除しますか。' } %>
                 </span>
                 <span class="control-item">
-                  <%= link_to "編集", edit_reply_path(reply.reply_id) %>
+                  <%= link_to '編集', edit_reply_path(reply.reply_id) %>
+                </span>
+                <span class="control-item">
+                  <%= link_to 'コメント', "/quotes/#{reply.reply_id}" %>
                 </span>
               </div>
             </div>
@@ -54,6 +59,5 @@
   </div>
 </div>
 
-<!--TODO comment paging -->
 <hr>
-<%= render '/replies/form', submit: "作成" %>
+<%= render '/replies/form', submit: '作成' %>
