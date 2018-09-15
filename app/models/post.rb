@@ -5,24 +5,19 @@ class Post < ApplicationRecord
   belongs_to :forum
   has_many :replies
 
-  def forum_posts(forum_id)
-    # @posts = Post.where("forum_id = ?", forum_id)
-    @posts = Post.find_by_sql ["SELECT
-      p.*
-      , IFNULL(r.r_cnt, 0) AS r_cnt
-      , IFNULL(r.recent_dttm, p.write_dttm) AS recent_dttm
-      FROM posts p
-      LEFT JOIN (
-        SELECT
-        post_id
-        , COUNT(*) AS r_cnt
-        , MAX(r.write_dttm) AS recent_dttm
-        FROM replies r
-        GROUP BY post_id
-      ) r
-      ON p.post_id = r.post_id
-      WHERE p.forum_id = ?", forum_id]
+  def forum_posts(forum_id, filter)
 
+    @posts = Post.where("posts.forum_id = ? AND posts.title like ?", forum_id, "%#{filter}%")
+        .joins("LEFT JOIN (
+                SELECT
+                post_id
+                , COUNT(*) AS r_cnt
+                , MAX(r.write_dttm) AS recent_dttm
+                FROM replies r
+                GROUP BY post_id
+              ) replies
+              ON posts.post_id = replies.post_id")
+        .select("posts.*, IFNULL(replies.r_cnt, 0) AS r_cnt, IFNULL(replies.recent_dttm, posts.write_dttm) AS recent_dttm")
     return @posts
   end
 

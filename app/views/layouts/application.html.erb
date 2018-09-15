@@ -10,13 +10,24 @@
   </head>
 
   <body>
-    <%#= render "shared/menu" %>
-    <%= render "shared/breadcrumb" %>
+    <div class="page-name">
+    <% if @post.nil? and !@current_forum.nil? %>
+      <span><%= @current_forum.forum_nm %></span>
+    <% elsif not @post.nil? %>
+      <span><%= @post.title %></span>
+    <% else %>
+      <span>A Board</span>
+    <% end %>
+    </div>
     <hr>
+    <%= render "shared/menu" %>
+    <%#= render "shared/breadcrumb" %>
 
     <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>">
+      <% if key.in?(['error', 'notice']) %>
         <%= value %>
+      <% end %>
       </div>
     <% end %>
 

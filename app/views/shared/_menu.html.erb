@@ -1,5 +1,8 @@
 <div id="main-menu">
-  <ul>
-    <li><a href="/forums/">Forums</a></li>
-  </ul>
+  <span><a href="/forums/">フォーラムリスト</a></span>
+  <% unless @post.nil? %>
+    |
+    <span><a href="/forums/<%= @post.forum_id %>">スレッドリスト</a></span>
+  <% end %>
+  <span></span>
 </div>

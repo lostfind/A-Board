@@ -1,5 +1,5 @@
 class RepliesController < ApplicationController
-  before_action :set_reply, only: [:edit, :update, :destroy]
+  before_action :set_reply, only: [:show, :edit, :update, :destroy]
 
   def create
     @reply = Reply.new(reply_params)
@@ -11,17 +11,21 @@ class RepliesController < ApplicationController
     end
   end
 
+  def show
+
+  end
+
   def edit
   end
 
   def update
-    if @reply.valid_password?(reply_params[:password])
-      if @reply.update(reply_params)
-        redirect_to post_path(@reply.post_id)
+    if @reply.valid_password?(params[:reply][:password])
+      if @reply.update(update_params)
+        redirect_to post_path(@reply.post_id), notice: 'コメントが編集されました。'
       end
     else
-      flash.now[:error] = "passwords is not correct"
-      render :edit
+      flash[:error] = "passwords is not correct"
+      render :action => 'edit'
     end
   end
 

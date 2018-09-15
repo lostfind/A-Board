@@ -47,6 +47,12 @@ body {
 ol {
     list-style: none;
     padding: 0px;
+    margin-top: 0px;
+}
+
+.page-name {
+    font-size: 25px;
+    color: #f2580b;
 }
 
 .navigation {
@@ -73,8 +79,13 @@ ol {
     margin-bottom: 11px;
 }
 
-.content {
+.content, .quote {
     white-space: pre-line;
+}
+
+.quote {
+    color: dodgerblue;
+    padding-bottom: 10px;
 }
 
 .post_message {

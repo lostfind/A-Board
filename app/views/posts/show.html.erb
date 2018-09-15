@@ -32,7 +32,9 @@
               </div>
               <div class="reply_body">
 <!--                TODO コメント内容表示-->
-                <p class="quote"><%= reply.quote_reply_id %></p>
+                <% unless reply.quote_content.nil? %>
+                <p class="quote"><%= reply.quote_content %></p>
+                <% end %>
                 <p class="content"><%= reply.content %></p>
               </div>
               <div class="reply_foot">
@@ -50,12 +52,21 @@
                   <%= link_to 'コメント', "/quotes/#{reply.reply_id}" %>
                 </span>
               </div>
+              <div class="delete-confirm">
+                <input type="password" />
+                <input type="button" value="確認" />
+              </div>
             </div>
           </li>
         <% end %>
       </ol>
     </div>
     <%= paginate @replies %>
+    <span>
+      <a href="/posts/<%= @post.post_id %>?per_page=10">10</a>
+      <a href="/posts/<%= @post.post_id %>?per_page=30">30</a>
+      <a href="/posts/<%= @post.post_id %>?per_page=50">50</a>
+    </span>
   </div>
 </div>
 

@@ -26,7 +26,16 @@
 <% end %>
 
 <div class="container">
-  <a href="/posts/new?forum_id=<%= @current_forum.forum_id %>">スレッド作成</a>
+  <div style="float: left">
+    <a href="/posts/new?forum_id=<%= @current_forum.forum_id %>">スレッド作成</a>
+  </div>
+  <div style="float: right">
+    <form class="filter" action="/forums/<%= @current_forum.forum_id %>" method="get">
+      <input type="search" name="filter" />
+      <input type="submit" value="スレッド検索" />
+    </form>
+  </div>
+  <div style="clear: both"></div>
 </div>
 
 <!--スレッドリスト-->
