@@ -22,4 +22,12 @@ class Reply < ApplicationRecord
   def encryption
     self.password = Digest::SHA256.hexdigest(self.password)
   end
+
+  def has_quote?(reply_id)
+    if Reply.where("quote_reply_id = ?", reply_id).length > 0
+      return true
+    else
+      return false
+    end
+  end
 end

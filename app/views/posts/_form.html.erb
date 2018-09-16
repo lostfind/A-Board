@@ -37,12 +37,12 @@
 
       <div class="field">
         <%= post_form.label "締切日" %>
-        <input type="date" name="post[close_dttm]" id="post_close_dttm" >
+        <%= post_form.text_field :close_dttm, type: 'date' %>
       </div>
 
       <div class="actions">
         <%= post_form.submit local_assigns[:submit] %>
-        <input type="button" value="キャンセル" onclick="history.back()">
+        <a href="/posts/<%= @post.post_id %>"><input type="button" value="キャンセル"></a>
       </div>
     <% end %>
   </div>

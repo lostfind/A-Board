@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_125517) do
     t.string "content", limit: 4000, null: false
     t.datetime "write_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "modify_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.datetime "close_dttm"
+    t.date "close_dttm"
   end
 
   create_table "replies", primary_key: "reply_id", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

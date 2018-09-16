@@ -1,4 +1,5 @@
 class Forum < ApplicationRecord
+  paginates_per 15
   has_many :posts
   def self.main_list(filter)
     forums = Forum.joins(

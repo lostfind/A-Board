@@ -1,29 +1,38 @@
-<% if @forums.length > 0 %>
+<%# if @forums.length > 0 %>
 <!--サブカテゴリ-->
-<div class="container">
-  <table class="list">
-    <thead>
-    <tr>
-      <th>フォーラム</th>
-      <th>詳細説明</th>
-      <th>スレッド数</th>
-      <th>作成日時</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @forums.each do |forum| %>
-      <tr>
-        <td><%= link_to forum.forum_nm, forum_path(id: forum.forum_id) %></td>
-        <td><%= forum.detail %></td>
-        <td><%= forum.count_all %></td>
-        <td><%= forum.create_dttm %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-<hr>
-<% end %>
+<!--<div class="container">-->
+<!--  <table class="list">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>フォーラム</th>-->
+<!--      <th>詳細説明</th>-->
+<!--      <th>スレッド数</th>-->
+<!--      <th>作成日時</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+    <%# @forums.each do |forum| %>
+<!--      <tr>-->
+<!--        <td><%#= link_to forum.forum_nm, forum_path(id: forum.forum_id) %></td>-->
+<!--        <td><%#= forum.detail %></td>-->
+<!--        <td><%#= forum.count_all %></td>-->
+<!--        <td><%#= forum.create_dttm %></td>-->
+<!--      </tr>-->
+    <%# end %>
+<!--    </tbody>-->
+<!--  </table>-->
+<!--  <div class="paging_control">-->
+    <%#= paginate @forums %>
+<!--    <span>-->
+<!--        1ページに:-->
+<!--        <a href="/forums?per_page=10">10</a>,-->
+<!--        <a href="/forums?per_page=30">30</a>,-->
+<!--        <a href="/forums?per_page=50">50</a>-->
+<!--      </span>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<hr>-->
+<%# end %>
 
 <div class="container">
   <div style="float: left">
@@ -52,7 +61,13 @@
     <tbody>
     <% @posts.each do |post| %>
     <tr>
-      <td><%= link_to post.title, post_path(post.post_id) %></td>
+      <td>
+        <%
+          if post.closed == 1
+             post.title = '[締切] ' + post.title
+          end
+        %>
+        <%= link_to post.title, post_path(post.post_id) %></td>
       <td><%= post.r_cnt %></td>
       <td><%= post.recent_dttm %></td>
       <td><%= post.write_dttm %></td>
@@ -60,4 +75,13 @@
     <% end %>
     </tbody>
   </table>
+  <div class="paging_control">
+    <%= paginate @posts %>
+    <span>
+        1ページに:
+        <a href="/forums/<%= @current_forum.forum_id %>?per_page=15">15</a>,
+        <a href="/forums/<%= @current_forum.forum_id %>?per_page=30">30</a>,
+        <a href="/forums/<%= @current_forum.forum_id %>?per_page=50">50</a>
+      </span>
+  </div>
 </div>

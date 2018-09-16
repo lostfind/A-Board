@@ -5,6 +5,7 @@
       <input type="submit" value="フォーラム検索" />
     </form>
   </div>
+  <div style="clear: both;"></div>
 </div>
 
 <div class="container">
@@ -28,4 +29,13 @@
       <% end %>
     </tbody>
   </table>
+  <div class="paging_control">
+    <%= paginate @forums %>
+    <span>
+        1ページに:
+        <a href="/forums?per_page=15">15</a>,
+        <a href="/forums?per_page=30">30</a>,
+        <a href="/forums?per_page=50">50</a>
+      </span>
+  </div>
 </div>

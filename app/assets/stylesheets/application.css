@@ -50,9 +50,13 @@ ol {
     margin-top: 0px;
 }
 
-.page-name {
+.page_name {
     font-size: 25px;
     color: #f2580b;
+}
+
+.paging_control {
+    text-align: right;
 }
 
 .navigation {
@@ -112,11 +116,11 @@ ol {
     color: #0084d7;
 }
 
-.control-item:before {
+.control_item:before {
     content: " | ";
 }
 
-.control-item:first-child:before {
+.control_item:first-child:before {
     content: "";
 }
 
@@ -126,7 +130,7 @@ ol {
     color: #d70000;
 }
 
-.post-control, .reply-control {
+.post_control, .reply_control {
     text-align: right;
 }
 

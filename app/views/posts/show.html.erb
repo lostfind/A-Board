@@ -1,11 +1,25 @@
 <div class="messages">
   <div class="container">
+    <div class="paging_control">
+      <%= paginate @replies %>
+      <span>
+        1ページに:
+        <a href="/posts/<%= @post.post_id %>?per_page=10">10</a>,
+        <a href="/posts/<%= @post.post_id %>?per_page=30">30</a>,
+        <a href="/posts/<%= @post.post_id %>?per_page=50">50</a>
+      </span>
+    </div>
     <div id="post_list">
       <ol id="posts" start="1">
         <li>
           <div class="post_message">
             <div class="post_head">
-              <p class="title"><%= @post.title %></p>
+              <p class="title">
+                <% if @closed %>
+                  [締切]
+                <% end %>
+                <%= @post.title %>
+              </p>
             </div>
             <div class="post_body">
               <p class="content"><%= @post.content %></p>
@@ -14,13 +28,15 @@
               <span class="user"><%= @post.post_user_id %></span>
               <span class="time"><%= @post.write_dttm %></span>
             </div>
-            <div class="post-control">
-              <span class="control-item">
+            <div class="post_control">
+              <% unless @closed %>
+              <span class="control_item">
                 <%= link_to 'スレッド削除', @post, method: :delete, data: { confirm: 'スレッドを削除しますか。' } %>
               </span>
-              <span class="control-item">
+              <span class="control_item">
                 <%= link_to '編集', edit_post_path(@post) %>
               </span>
+              <% end %>
             </div>
           </div>
         </li>
@@ -41,34 +57,41 @@
                 <span class="user"><%= reply.user_id %></span>
                 <span class="time"><%= reply.write_dttm %></span>
               </div>
-              <div class="reply-control">
-                <span class="control-item">
-                  <%= link_to '削除', reply, method: :delete, data: { confirm: 'コメントを削除しますか。' } %>
-                </span>
-                <span class="control-item">
-                  <%= link_to '編集', edit_reply_path(reply.reply_id) %>
-                </span>
-                <span class="control-item">
-                  <%= link_to 'コメント', "/quotes/#{reply.reply_id}" %>
-                </span>
+              <div class="reply_control">
+                <% unless @closed %>
+                  <span class="control_item">
+                    <%= link_to '削除', reply, method: :delete, data: { confirm: 'コメントを削除しますか。' } %>
+                  </span>
+                  <span class="control_item">
+                    <%= link_to '編集', edit_reply_path(reply.reply_id) %>
+                  </span>
+                  <span class="control_item">
+                    <%= link_to '引用', "/quotes/#{reply.reply_id}" %>
+                  </span>
+                <% end %>
               </div>
-              <div class="delete-confirm">
-                <input type="password" />
-                <input type="button" value="確認" />
-              </div>
+<!--              <div class="delete-confirm">-->
+<!--                <input type="password" />-->
+<!--                <input type="button" value="確認" />-->
+<!--              </div>-->
             </div>
           </li>
         <% end %>
       </ol>
     </div>
-    <%= paginate @replies %>
-    <span>
-      <a href="/posts/<%= @post.post_id %>?per_page=10">10</a>
-      <a href="/posts/<%= @post.post_id %>?per_page=30">30</a>
-      <a href="/posts/<%= @post.post_id %>?per_page=50">50</a>
-    </span>
+    <div class="paging_control">
+      <%= paginate @replies %>
+      <span>
+        1ページに:
+        <a href="/posts/<%= @post.post_id %>?per_page=10">10</a>,
+        <a href="/posts/<%= @post.post_id %>?per_page=30">30</a>,
+        <a href="/posts/<%= @post.post_id %>?per_page=50">50</a>
+      </span>
+    </div>
   </div>
 </div>
 
+<% unless @closed %>
 <hr>
 <%= render '/replies/form', submit: '作成' %>
+<% end %>
