@@ -42,7 +42,11 @@
 
       <div class="actions">
         <%= post_form.submit local_assigns[:submit] %>
-        <a href="/posts/<%= @post.post_id %>"><input type="button" value="キャンセル"></a>
+        <% if @post.post_id.nil? %>
+          <a href="/forums/<%= @post.forum_id %>"><input type="button" value="キャンセル"></a>
+        <% else %>
+          <a href="/posts/<%= @post.post_id %>"><input type="button" value="キャンセル"></a>
+        <% end %>
       </div>
     <% end %>
   </div>

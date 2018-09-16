@@ -11,7 +11,7 @@
 
   <body>
     <div class="page_name">
-    <% if @post.nil? and !@current_forum.nil? %>
+    <% if (@post.nil? || @post.post_id.nil?) && !@current_forum.nil? %>
       <span><%= @current_forum.forum_nm %></span>
     <% elsif not @post.nil? %>
       <span><%= @post.title %></span>
