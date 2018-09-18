@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   resources :posts
   resources :replies
 
+  post 'posts/:id/edit(.:format)', to: 'posts#edit'
+  post 'replies/:id/edit(.:format)', to: 'replies#edit'
   get '/quotes/:id', to: 'replies#quote'
+
+  get '/search', to: 'search#index'
 end

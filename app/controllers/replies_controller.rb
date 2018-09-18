@@ -21,35 +21,44 @@ class RepliesController < ApplicationController
   end
 
   def edit
-    if is_closed?
-      redirect_to post_path(@reply.post_id), alert: 'スレッドが締切です。'
+    if params[:reply].nil?
+      redirect_to post_path(@reply.post_id)
+    elsif @reply.valid_password?(params[:reply][:password])
+      if is_closed?
+        redirect_to post_path(@reply.post_id), alert: 'スレッドが締切です。'
+      end
+      @post = Post.find(@reply.post_id)
+    else
+      redirect_to post_path(@reply.post_id), alert: 'パスワードが一致しません。'
     end
-    @post = Post.find(@reply.post_id)
   end
 
   def update
-    if @reply.valid_password?(params[:reply][:password])
-      if @reply.update(update_params)
-        redirect_to post_path(@reply.post_id), notice: 'コメントが編集されました。'
-      end
+    if @reply.update(update_params)
+      redirect_to post_path(@reply.post_id), notice: 'コメントが編集されました。'
     else
-      flash[:alert] = 'passwords is not correct'
+      flash[:alert] = 'エラーが発生しました。'
       render :action => 'edit'
     end
   end
 
   def destroy
-    if is_closed?
-      redirect_to post_path(@reply.post_id), alert: 'スレッドが締切です。'
-    else
-
-      if @reply.has_quote?(@reply.reply_id)
-        flash[:alert] = '引用されているコメントは削除できません。'
-      else
-        @reply.destroy
-      end
-
+    if params[:reply].nil?
       redirect_to post_path(@reply.post_id)
+    elsif @reply.valid_password?(params[:reply][:password])
+      if is_closed?
+        redirect_to post_path(@reply.post_id), alert: 'スレッドが締切です。'
+      else
+        if @reply.has_quote?(@reply.reply_id)
+          flash[:alert] = '引用されているコメントは削除できません。'
+        else
+          @reply.destroy
+          flash[:notice] = 'コメントが削除されました。'
+        end
+        redirect_to post_path(@reply.post_id)
+      end
+    else
+      redirect_to post_path(@reply.post_id), alert: 'パスワードが一致しません。'
     end
   end
 

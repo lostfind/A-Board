@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="filter" style="float: right">
+    <form action="/search" method="get">
+      <%
+        @category = params[:category]
+        unless @current_forum.nil?
+          @category = 'threads'
+        end
+      %>
+      <%= select '', 'category', [['すべて', 'all'], ['フォーラム', 'forums'], ['スレッド', 'threads']], {:selected => @category} %>
+      <input type="search" name="filter" value="<%= params[:filter] %>"/>
+      <input type="submit" value="検索" />
+    </form>
+  </div>
+  <div style="clear: both;"></div>
+</div>

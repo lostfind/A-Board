@@ -28,34 +28,44 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if is_closed?
-      redirect_to post_path(@post.post_id), alert: 'スレッドが締切です。'
+    if params[:post].nil?
+      redirect_to post_path(@post.post_id)
+    elsif @post.valid_password?(params[:post][:password])
+      if is_closed?
+        redirect_to post_path(@post.post_id), alert: 'スレッドが締切です。'
+      end
+    else
+      redirect_to post_path(@post.post_id), alert: 'パスワードが一致しません。'
     end
   end
 
   def update
-    if @post.valid_password?(params[:post][:password])
-      if @post.update(update_params)
-        redirect_to post_path(@post.post_id), notice: 'スレッドが更新できました。'
-      end
+    if @post.update(update_params)
+      redirect_to post_path(@post.post_id), notice: 'スレッドを更新しました。'
     else
-      flash.now[:alert] = 'パスワードが一致しません。'
+      flash[:alert] = 'エラーが発生しました。'
       render :edit, post: @post
     end
   end
 
   def destroy
-    if is_closed?
-      redirect_to post_path(@post.post_id), alert: 'スレッドが締切です。'
-    else
-      if @post.has_comment?(@post.post_id)
-        flash[:alert] = 'コメントがあるスレッドは削除できません。'
-        redirect_to post_path(@post.post_id)
+    if params[:post].nil?
+      redirect_to post_path(@post.post_id)
+    elsif @post.valid_password?(params[:post][:password])
+      if is_closed?
+        redirect_to post_path(@post.post_id), alert: 'スレッドが締切です。'
       else
-        @post.destroy
-        flash[:notice] = 'スレッドが削除されました。'
-        redirect_to forum_path(@post.forum_id)
+        if @post.has_comment?(@post.post_id)
+          flash[:alert] = 'コメントがあるスレッドは削除できません。'
+          redirect_to post_path(@post.post_id)
+        else
+          @post.destroy
+          flash[:notice] = 'スレッドが削除されました。'
+          redirect_to forum_path(@post.forum_id)
+        end
       end
+    else
+      redirect_to post_path(@post.post_id), alert: 'パスワードが一致しません。'
     end
   end
 

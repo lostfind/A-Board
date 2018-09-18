@@ -38,8 +38,23 @@
               </span>
               <% end %>
             </div>
+            <div id="post_del_<%= @post.post_id %>" class="del_confirm t_right">
+              <%= form_for(@post, :html => { :method => :delete, :remote => true }) do |f| %>
+                <span>パスワード</span>
+                <%= f.password_field :password %>
+                <%= f.submit :value => "確認" %>
+              <% end %>
+            </div>
+            <div id="post_mod_<%= @post.post_id %>" class="mod_confirm t_right">
+              <%= form_for @post, url: {action: 'edit'}, :html => { method: 'post' } do |f| %>
+                <span>パスワード</span>
+                <%= f.password_field :password %>
+                <%= f.submit :value => "確認" %>
+              <% end %>
+            </div>
           </div>
         </li>
+
         <!-- Reply -->
         <% @replies.each do |reply| %>
           <li>
@@ -47,7 +62,7 @@
               <div class="post_head">
               </div>
               <div class="reply_body">
-<!--                TODO コメント内容表示-->
+                <!-- TODO コメント内容表示-->
                 <% unless reply.quote_content.nil? %>
                 <p class="quote"><%= reply.quote_content %></p>
                 <% end %>
@@ -70,10 +85,20 @@
                   </span>
                 <% end %>
               </div>
-<!--              <div class="delete-confirm">-->
-<!--                <input type="password" />-->
-<!--                <input type="button" value="確認" />-->
-<!--              </div>-->
+              <div id="reply_del_<%= reply.reply_id %>" class="del_confirm t_right">
+                <%= form_for(reply, :html => { :method => :delete, :remote => true }) do |f| %>
+                  <span>パスワード</span>
+                  <%= f.password_field :password %>
+                  <%= f.submit :value => "確認" %>
+                <% end %>
+              </div>
+              <div id="reply_mod_<%= reply.reply_id %>" class="mod_confirm t_right">
+                <%= form_for reply, url: "/replies/#{reply.reply_id}/edit", :html => { method: 'post' } do |f| %>
+                  <span>パスワード</span>
+                  <%= f.password_field :password %>
+                  <%= f.submit :value => "確認" %>
+                <% end %>
+              </div>
             </div>
           </li>
         <% end %>

@@ -19,6 +19,14 @@ a, a:link, a:visited {
     color: #f2580b;
 }
 
+.t_center {
+    text-align: center;
+}
+
+.t_right {
+    text-align: right;
+}
+
 a:hover { text-decoration: underline; }
 
 table.list {

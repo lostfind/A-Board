@@ -20,10 +20,12 @@
         <%= post_form.text_field :post_user_id %>
       </div>
 
-      <div class="field">
-        <%= post_form.label "パスワード" %>
-        <%= post_form.password_field :password %>
-      </div>
+      <% if request.env['PATH_INFO'] === new_post_path %>
+        <div class="field">
+          <%= post_form.label "パスワード" %>
+          <%= post_form.password_field :password %>
+        </div>
+      <% end %>
 
       <div class="field">
         <%= post_form.label "タイトル" %>
