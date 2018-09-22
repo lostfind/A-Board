@@ -5,7 +5,7 @@ class RepliesController < ApplicationController
     @reply = Reply.new(reply_params)
     @reply.encryption
 
-    if @reply.user_id = ''
+    if @reply.user_id === ''
       @reply.user_id = 'Anonymous'
     end
 
