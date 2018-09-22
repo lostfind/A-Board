@@ -27,8 +27,8 @@
         <%= f.text_area :content, class:'form-control tinymce', rows: '8' %>
       </div>
       <div class="actions">
-        <%= f.submit local_assigns[:submit] %>
         <a href="/posts/<%= @reply.post_id %>"><input type="button" value="キャンセル"></a>
+        <%= f.submit local_assigns[:submit] %>
       </div>
     <% end %>
   </div>

@@ -31,23 +31,24 @@
             <% unless @closed %>
               <div class="post_control">
                 <span class="control_item">
-                  <%= link_to 'スレッド削除', @post, method: :delete, data: { confirm: 'スレッドを削除しますか。' } %>
+                  <%#= link_to '', @post, method: :delete, data: { confirm: 'スレッドを削除しますか。' } %>
+                  <%= link_to 'スレッド削除', 'javascript:void(0)', onclick: "passShow('post_del_#{@post.post_id}')" %>
                 </span>
                 <span class="control_item">
-                  <%= link_to '編集', edit_post_path(@post) %>
+                  <%= link_to '編集', 'javascript:void(0)', onclick: "passShow('post_mod_#{@post.post_id}')" %>
                 </span>
               </div>
-              <div id="post_del_<%= @post.post_id %>" class="del_confirm t_right">
-                <%= form_for(@post, :html => { :method => :delete, :remote => true }) do |f| %>
+              <div id="post_del_<%= @post.post_id %>" class="confirm t_right hidden">
+                <%= form_for(@post, html: { method: 'delete', remote: true, id: "post_del_form_#{@post.post_id}" }) do |f| %>
                   <span>パスワード</span>
-                  <%= f.password_field :password %>
-                  <%= f.submit :value => "確認" %>
+                  <%= f.password_field :password, id: "post_del_pass_#{@post.post_id}" %>
+                  <%= f.submit :value => "削除" %>
                 <% end %>
               </div>
-              <div id="post_mod_<%= @post.post_id %>" class="mod_confirm t_right">
-                <%= form_for @post, url: {action: 'edit'}, :html => { method: 'post' } do |f| %>
+              <div id="post_mod_<%= @post.post_id %>" class="confirm t_right hidden">
+                <%= form_for @post, url: {action: 'edit'}, html: { method: 'post', id: "post_mod_form_#{@post.post_id}" } do |f| %>
                   <span>パスワード</span>
-                  <%= f.password_field :password %>
+                  <%= f.password_field :password, id: "post_mod_pass_#{@post.post_id}" %>
                   <%= f.submit :value => "確認" %>
                 <% end %>
               </div>
@@ -77,26 +78,26 @@
               <% unless @closed %>
                 <div class="reply_control">
                   <span class="control_item">
-                    <%= link_to '削除', reply, method: :delete, data: { confirm: 'コメントを削除しますか。' } %>
+                    <%= link_to '削除', 'javascript:void(0)', onclick: "passShow('reply_del_#{reply.reply_id}')" %>
                   </span>
                   <span class="control_item">
-                    <%= link_to '編集', edit_reply_path(reply.reply_id) %>
+                    <%= link_to '編集', 'javascript:void(0)', onclick: "passShow('reply_mod_#{reply.reply_id}')" %>
                   </span>
                   <span class="control_item">
                     <%= link_to '引用', "/quotes/#{reply.reply_id}" %>
                   </span>
                 </div>
-                <div id="reply_del_<%= reply.reply_id %>" class="del_confirm t_right">
-                  <%= form_for(reply, :html => { :method => :delete, :remote => true }) do |f| %>
-                    <span>パスワード</span>
-                    <%= f.password_field :password %>
-                    <%= f.submit :value => "確認" %>
+                <div id="reply_del_<%= reply.reply_id %>" class="confirm t_right hidden">
+                  <%= form_for(reply, html: {method: 'delete', remote: true, id: "reply_del_form_#{reply.reply_id}"}) do |f| %>
+                    <span class="password">パスワード</span>
+                    <%= f.password_field :password, id: "reply_del_pass_#{reply.reply_id}" %>
+                    <%= f.submit :value => "削除", data: { confirm: 'スレッドを削除しますか。' }%>
                   <% end %>
                 </div>
-                <div id="reply_mod_<%= reply.reply_id %>" class="mod_confirm t_right">
-                  <%= form_for reply, url: "/replies/#{reply.reply_id}/edit", :html => { method: 'post' } do |f| %>
-                    <span>パスワード</span>
-                    <%= f.password_field :password %>
+                <div id="reply_mod_<%= reply.reply_id %>" class="confirm t_right hidden">
+                  <%= form_for reply, url: "/replies/#{reply.reply_id}/edit", html: { method: 'post', id: "reply_mod_form_#{reply.reply_id}" } do |f| %>
+                    <span class="password">パスワード</span>
+                    <%= f.password_field :password, id: "reply_mod_pass_#{reply.reply_id}" %>
                     <%= f.submit :value => "確認" %>
                   <% end %>
                 </div>

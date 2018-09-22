@@ -29,7 +29,7 @@
 
       <div class="field">
         <%= post_form.label "タイトル" %>
-        <%= post_form.text_field :title %>
+        <%= post_form.text_field :title, class: 'title' %>
       </div>
 
       <div class="field">
@@ -49,12 +49,12 @@
       </div>
 
       <div class="actions">
-        <%= post_form.submit local_assigns[:submit] %>
         <% if @post.post_id.nil? %>
           <a href="/forums/<%= @post.forum_id %>"><input type="button" value="キャンセル"></a>
         <% else %>
           <a href="/posts/<%= @post.post_id %>"><input type="button" value="キャンセル"></a>
         <% end %>
+        <%= post_form.submit local_assigns[:submit] %>
       </div>
     <% end %>
   </div>
