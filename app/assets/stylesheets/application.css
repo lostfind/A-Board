@@ -97,7 +97,8 @@ ol {
 
 .quote {
     color: dodgerblue;
-    padding-bottom: 10px;
+    text-align: left;
+    font-size: small;
 }
 
 .post_message {

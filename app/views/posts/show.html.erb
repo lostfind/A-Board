@@ -64,7 +64,9 @@
               <div class="reply_body">
                 <!-- TODO コメント内容表示-->
                 <% unless reply.quote_content.nil? %>
-                <p class="quote"><%= reply.quote_content %></p>
+                  <p class="quote">引用 ></p>
+                  <p><%= reply.quote_content.html_safe %></p>
+                  <hr>
                 <% end %>
                 <p class="content"><%= reply.content.html_safe %></p>
               </div>

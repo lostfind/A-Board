@@ -18,7 +18,13 @@
       <% end %>
       <div class="field">
         <%= f.label "コメント" %>
-        <%= f.text_area :content %>
+        <%= tinymce language: 'ja',
+                    cleanup: true,
+                    relative_urls: false,
+                    remove_script_host: false,
+                    convert_urls: true
+        %>
+        <%= f.text_area :content, class:'form-control tinymce', rows: '8' %>
       </div>
       <div class="actions">
         <%= f.submit local_assigns[:submit] %>

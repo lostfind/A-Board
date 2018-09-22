@@ -34,7 +34,13 @@
 
       <div class="field">
         <%= post_form.label :content %>
-        <%= post_form.text_area :content %>
+        <%= tinymce language: 'ja',
+                    cleanup: true,
+                    relative_urls: false,
+                    remove_script_host: false,
+                    convert_urls: true
+        %>
+        <%= post_form.text_area :content, class:'form-control tinymce', rows: '15' %>
       </div>
 
       <div class="field">

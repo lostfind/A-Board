@@ -1,0 +1,7 @@
+toolbar: undo redo | forecolor | bold italic | alignleft aligncenter alignright | code | link | image
+plugins:
+  - link
+  - textcolor
+  - code
+  - image
+  - paste
