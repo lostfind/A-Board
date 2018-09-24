@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   belongs_to :forum
   has_many :replies
 
-  def forum_posts(forum_id, filter)
+  def forum_posts(forum_id, filter, order = nil)
     @posts = Post.where("posts.forum_id = ? AND posts.title like ?", forum_id, "%#{filter}%")
         .joins("LEFT JOIN (
                 SELECT
@@ -17,6 +17,7 @@ class Post < ApplicationRecord
               ON posts.post_id = replies.post_id")
         .select("posts.*, IFNULL(replies.r_cnt, 0) AS r_cnt, IFNULL(replies.recent_dttm, posts.write_dttm) AS recent_dttm
                 , CASE WHEN posts.close_dttm < CURRENT_DATE THEN true ELSE false END AS closed")
+        .order("post_id").reorder(order)
     return @posts
   end
 

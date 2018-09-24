@@ -1,13 +1,19 @@
 <%= render 'shared/search' %>
 
 <div class="container">
+  <div class="list_desc">
+  <%= link_to 'スレッド多い順',
+              params: params.except(:controller, :action).merge(order: 'cnt_desc').permit!.to_h %> |
+  <%= link_to '最新スレッド順',
+              params: params.except(:controller, :action).merge(order: 'date_desc').permit!.to_h %>
+  </div>
   <table class="list">
     <thead>
       <tr>
         <th>フォーラム</th>
         <th>詳細説明</th>
         <th>スレッド数</th>
-        <th>作成日時</th>
+        <th>最新スレッド</th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +22,7 @@
         <td><%= link_to forum.forum_nm, forum_path(id: forum.forum_id) %></td>
         <td><%= forum.detail %></td>
         <td><%= forum.count_all ||= 0 %></td>
-        <td><%= forum.create_dttm %></td>
+        <td><%= forum.write_dttm %></td>
       </tr>
       <% end %>
     </tbody>
@@ -24,10 +30,10 @@
   <div class="paging_control">
     <%= paginate @forums %>
     <span>
-        1ページに:
-        <a href="/forums?per_page=15">15</a>,
-        <a href="/forums?per_page=30">30</a>,
-        <a href="/forums?per_page=50">50</a>
-      </span>
+      1ページに:
+      <%= link_to '15', params: params.except(:controller, :action).merge(per_page: '15').permit!.to_h %>,
+      <%= link_to '30', params: params.except(:controller, :action).merge(per_page: '30').permit!.to_h %>,
+      <%= link_to '50', params: params.except(:controller, :action).merge(per_page: '50').permit!.to_h %>
+    </span>
   </div>
 </div>

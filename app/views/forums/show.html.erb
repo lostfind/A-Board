@@ -38,13 +38,21 @@
 
 <!--スレッドリスト-->
 <div class="container">
+  <div class="list_desc">
+    <%= link_to '最新スレッド順',
+                params: params.except(:controller, :action).merge(order: 'tdate_desc').permit!.to_h %> |
+    <%= link_to 'コメント多い順',
+                params: params.except(:controller, :action).merge(order: 'cnt_desc').permit!.to_h %> |
+    <%= link_to '最新コメント順',
+                params: params.except(:controller, :action).merge(order: 'cdate_desc').permit!.to_h %>
+  </div>
   <table class="list">
     <thead>
     <tr>
       <th>スレッド</th>
       <th>コメント数</th>
-      <th>最新の投稿</th>
-      <th>作成日時</th>
+      <th>最新コメント</th>
+      <th>スレッド作成</th>
     </tr>
     </thead>
     <tbody>
@@ -77,10 +85,10 @@
   <div class="paging_control">
     <%= paginate @posts %>
     <span>
-        1ページに:
-        <a href="/forums/<%= @current_forum.forum_id %>?per_page=15">15</a>,
-        <a href="/forums/<%= @current_forum.forum_id %>?per_page=30">30</a>,
-        <a href="/forums/<%= @current_forum.forum_id %>?per_page=50">50</a>
-      </span>
+      1ページに:
+      <%= link_to '15', params: params.except(:controller, :action).merge(per_page: '15').permit!.to_h %>,
+      <%= link_to '30', params: params.except(:controller, :action).merge(per_page: '30').permit!.to_h %>,
+      <%= link_to '50', params: params.except(:controller, :action).merge(per_page: '50').permit!.to_h %>
+    </span>
   </div>
 </div>

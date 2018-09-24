@@ -18,7 +18,15 @@ a, a:link, a:visited {
     text-decoration: none;
     color: #f2580b;
 }
-
+.osusume {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+.osu_icon {
+    font-size: 20px;
+    padding-right: 10px;
+}
 .t_center {
     text-align: center;
 }
@@ -57,9 +65,14 @@ ol {
     padding: 0;
     margin-top: 0;
 }
-
-.filter {
+.f_left {
+    float: left;
+}
+.f_right {
     float: right;
+}
+.f_clear {
+    clear: both;
 }
 .hidden {
     display: none;
@@ -105,6 +118,8 @@ ol {
 .quote {
     color: dodgerblue;
     text-align: left;
+}
+.quote_content {
     font-size: small;
 }
 
@@ -114,6 +129,7 @@ ol {
     padding: 16px;
     margin-bottom: 10px;
     border: 1px solid #9a9a9a;
+    position: relative;
 }
 
 .reply_message {
@@ -121,6 +137,7 @@ ol {
     font-weight: 300;
     padding: 16px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .reply_message img {
@@ -133,10 +150,13 @@ ol {
 .post_head, .reply_head {
     margin-bottom: 10px;
 }
-
 .post_foot {
     margin-top: 12px;
     color: #0084d7;
+}
+.post_control, .reply_control {
+    text-align: right;
+    clear: both;
 }
 
 .control_item:before {
@@ -152,9 +172,6 @@ ol {
     color: #d70000;
 }
 
-.post_control, .reply_control {
-    text-align: right;
-}
 
 p.title {
     color: #000000;

@@ -28,10 +28,15 @@
               <span class="user"><%= @post.post_user_id %></span>
               <span class="time"><%= @post.write_dttm %></span>
             </div>
+            <div class="osusume">
+              <a href="#">
+                <p class="t_right osu_icon">👍</p>
+                <p class="t_right">100000</p>
+              </a>
+            </div>
             <% unless @closed %>
               <div class="post_control">
                 <span class="control_item">
-                  <%#= link_to '', @post, method: :delete, data: { confirm: 'スレッドを削除しますか。' } %>
                   <%= link_to 'スレッド削除', 'javascript:void(0)', onclick: "passShow('post_del_#{@post.post_id}')" %>
                 </span>
                 <span class="control_item">
@@ -60,21 +65,27 @@
         <% @replies.each do |reply| %>
           <li>
             <div class="reply_message">
-              <div class="post_head">
+                <div class="reply_body">
+                  <% unless reply.quote_content.nil? %>
+                    <div class="quote_content">
+                      <p class="quote">引用 ></p>
+                      <%= reply.quote_content.html_safe %>
+                    </div>
+                    <hr>
+                  <% end %>
+                  <p class="content"><%= reply.content.html_safe %></p>
+                </div>
+                <div class="reply_foot">
+                  <span class="user"><%= reply.user_id %></span>
+                  <span class="time"><%= reply.write_dttm %></span>
+                </div>
+              <div class="osusume">
+                <a href="#">
+                  <p class="t_right osu_icon">♥</p>
+                  <p class="t_right">1000000</p>
+                </a>
               </div>
-              <div class="reply_body">
-                <!-- TODO コメント内容表示-->
-                <% unless reply.quote_content.nil? %>
-                  <p class="quote">引用 ></p>
-                  <p><%= reply.quote_content.html_safe %></p>
-                  <hr>
-                <% end %>
-                <p class="content"><%= reply.content.html_safe %></p>
-              </div>
-              <div class="reply_foot">
-                <span class="user"><%= reply.user_id %></span>
-                <span class="time"><%= reply.write_dttm %></span>
-              </div>
+
               <% unless @closed %>
                 <div class="reply_control">
                   <span class="control_item">

@@ -5,7 +5,7 @@ class Reply < ApplicationRecord
   def self.reply_list(post_id)
     @replies = Reply.where("replies.post_id = ?", post_id)
                    .joins("LEFT JOIN replies AS quote ON replies.quote_reply_id = quote.reply_id")
-                   .select("replies.*, quote.content as quote_content")
+                   .select("replies.*, quote.content as quote_content").order("reply_id")
 
     return @replies
   end
