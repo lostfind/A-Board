@@ -1,5 +1,4 @@
 class Post < ApplicationRecord
-  paginates_per 15
   validates :title, presence: true
   validates :content, presence: true
   belongs_to :forum
