@@ -4,7 +4,7 @@ function passShow (id) {
         element[i].classList.add('hidden');
     }
 
-    var element = document.getElementById(id);
+    element = document.getElementById(id);
     element.classList.remove('hidden');
     element.children[0][2].focus();
 }

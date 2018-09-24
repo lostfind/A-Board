@@ -1,5 +1,6 @@
 class RepliesController < ApplicationController
   before_action :set_reply, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   def create
     @reply = Reply.new(reply_params)
@@ -90,7 +91,7 @@ class RepliesController < ApplicationController
 
   def is_closed?
     return Post.find(@reply.post_id).is_closed?
-      # redirect_to post_path(@reply.post_id)
+    # redirect_to post_path(@reply.post_id)
     #   return true
     # end
   end
