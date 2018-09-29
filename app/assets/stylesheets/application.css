@@ -224,3 +224,15 @@ form textarea:focus {
 input.title {
     width: 100%;
 }
+
+.like_post, .like_reply {
+    cursor: pointer;
+}
+
+.like-btn {
+    color: #797985;
+}
+
+.like-btn-unlike {
+    color: #ff0a97;
+}

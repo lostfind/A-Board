@@ -29,10 +29,10 @@
               <span class="time"><%= @post.write_dttm %></span>
             </div>
             <div class="osusume">
-              <% if PostLike.find_by( post_id: @post.post_id, user_ip: request.remote_ip ) %>
-                <%= link_to 'UNLIKE', "/posts/#{@post.post_id}/unlike", {method: 'post'} %>
+              <% if @post_liked %>
+                <span class="like_post fa fa-heart like-btn-unlike" id="post<%= @post.post_id %>" post_id="<%= @post.post_id %>"></span>
               <% else %>
-                <%= link_to 'LIKE', "/posts/#{@post.post_id}/like", {method: 'post'} %>
+                <span class="like_post fa fa-heart like-btn" id="post<%= @post.post_id %>" post_id="<%= @post.post_id %>"></span>
               <% end %>
               <span class="t_right"><%= @post.post_likes.count %></span>
             </div>
@@ -82,14 +82,12 @@
                   <span class="time"><%= reply.write_dttm %></span>
                 </div>
               <div class="osusume">
-                <a href="#">
-                  <% if ReplyLike.find_by( reply_id: reply.reply_id, user_ip: request.remote_ip ) %>
-                    <%= link_to '💔', "/replies/#{reply.reply_id}/unlike", {method: 'post'} %>
-                  <% else %>
-                    <%= link_to '♥', "/replies/#{reply.reply_id}/like", {method: 'post'} %>
-                  <% end %>
-                  <span class="t_right"><%= reply.reply_likes.count %></span>
-                </a>
+                <% if ReplyLike.find_by( reply_id: reply.reply_id, user_ip: request.remote_ip ) %>
+                  <span class="like_reply fa fa-heart like-btn-unlike" id="reply<%= @post.post_id %>" reply_id="<%= reply.reply_id %>"></span>
+                <% else %>
+                  <span class="like_reply fa fa-heart like-btn" id="reply<%= @post.post_id %>" reply_id="<%= reply.reply_id %>"></span>
+                <% end %>
+                <span class="t_right"><%= reply.reply_likes.count %></span>
               </div>
 
               <% unless @closed %>
@@ -140,3 +138,50 @@
 <hr>
 <%= render '/replies/form', submit: '作成' %>
 <% end %>
+
+<script>
+    $(document).ready(function() {
+        $(".like_post").click(function () {
+            $el = $(this);
+            $post_id = $el.attr("post_id");
+            $el_like_cnt = $el[0].parentElement.lastElementChild;
+            $.ajax({
+                url: '/posts/' + $post_id + '/like',
+                type: 'post',
+                dataType: 'json',
+                data: {},
+                success: function (response) {
+                    if (response.like_action === "unlike") {
+                        $el_like_cnt.textContent--;
+                        $el.removeClass("like-btn-unlike").addClass("like-btn");
+                    } else {
+                        $el_like_cnt.textContent++;
+                        $el.removeClass("like-btn").addClass("like-btn-unlike");
+                    }
+                }
+            });
+        })
+
+        $(".like_reply").click(function () {
+            $el = $(this);
+            $reply_id = $el.attr("reply_id");
+            $el_like_cnt = $el[0].parentElement.lastElementChild;
+            $.ajax({
+                url: '/replies/' + $reply_id + '/like',
+                type: 'post',
+                dataType: 'json',
+                data: {},
+                success: function (response) {
+                    if (response.like_action === "unlike") {
+                        $el_like_cnt.textContent--;
+                        $el.removeClass("like-btn-unlike").addClass("like-btn");
+                    } else {
+                        $el_like_cnt.textContent++;
+                        $el.removeClass("like-btn").addClass("like-btn-unlike");
+                    }
+                }
+            });
+        })
+    });
+
+</script>

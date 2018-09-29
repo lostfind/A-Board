@@ -12,11 +12,8 @@ Rails.application.routes.draw do
   post 'replies/:id/edit(.:format)', to: 'replies#edit'
   get '/quotes/:id', to: 'replies#quote'
 
-  post 'posts/:id/like', to: 'post_like#create'
-  post 'posts/:id/unlike', to: 'post_like#destroy'
-
-  post 'replies/:id/like', to: 'reply_like#create'
-  post 'replies/:id/unlike', to: 'reply_like#destroy'
+  post 'posts/:id/like', to: 'post_like#like'
+  post 'replies/:id/like', to: 'reply_like#like'
 
   get '/search', to: 'search#index'
 end

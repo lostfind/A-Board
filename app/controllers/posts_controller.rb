@@ -25,6 +25,7 @@ class PostsController < ApplicationController
     # @parent_forum = Forum.find_by_forum_id(@current_forum.parent_forum_id)
     @replies = @post.replies.page(params[:page]).per(params[:per_page])
     @reply = Reply.new(post_id: @post.post_id)
+    @post_liked = true unless PostLike.find_by(post_id: @post.post_id, user_ip: request.remote_ip).nil?
   end
 
   def edit

@@ -16,4 +16,6 @@
 //= require_tree .
 //= require tinymce
 //= require tinymce-jquery
+//= require jquery
+//= require jquery_ujs
 //= require posts.js
