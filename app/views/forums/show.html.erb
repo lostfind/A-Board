@@ -43,6 +43,8 @@
                 params: params.except(:controller, :action).merge(order: 'tdate_desc').permit!.to_h %> |
     <%= link_to 'コメント多い順',
                 params: params.except(:controller, :action).merge(order: 'cnt_desc').permit!.to_h %> |
+    <%= link_to 'いいね多い順',
+                params: params.except(:controller, :action).merge(order: 'like_desc').permit!.to_h %> |
     <%= link_to '最新コメント順',
                 params: params.except(:controller, :action).merge(order: 'cdate_desc').permit!.to_h %>
   </div>
@@ -50,14 +52,15 @@
     <thead>
     <tr>
       <th>スレッド</th>
-      <th>コメント数</th>
-      <th>最新コメント</th>
-      <th>スレッド作成</th>
+      <th width="7%">コメント</th>
+      <th width="7%">いいね</th>
+      <th width="20%">最新コメント</th>
+      <th width="20%">スレッド作成</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-      <td colspan="4" class="t_center">
+      <td colspan="5" class="t_center">
         <a href="/posts/new?forum_id=<%= @current_forum.forum_id %>">スレッド作成</a>
       </td>
     </tr>
@@ -71,12 +74,13 @@
         %>
         <%= link_to post.title, post_path(post.post_id) %></td>
       <td><%= post.r_cnt %></td>
+      <td><%= post.like_cnt %></td>
       <td><%= post.recent_dttm %></td>
       <td><%= post.write_dttm %></td>
     </tr>
     <% end %>
     <tr>
-      <td colspan="4" class="t_center">
+      <td colspan="5" class="t_center">
         <a href="/posts/new?forum_id=<%= @current_forum.forum_id %>">スレッド作成</a>
       </td>
     </tr>

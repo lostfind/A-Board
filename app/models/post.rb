@@ -15,8 +15,12 @@ class Post < ApplicationRecord
                 FROM replies r
                 GROUP BY post_id
               ) replies
-              ON posts.post_id = replies.post_id")
-        .select("posts.*, IFNULL(replies.r_cnt, 0) AS r_cnt, IFNULL(replies.recent_dttm, posts.write_dttm) AS recent_dttm
+              ON posts.post_id = replies.post_id
+              LEFT JOIN (
+                SELECT post_id, COUNT(*) AS like_cnt FROM post_likes GROUP BY post_id
+               ) likes
+              ON posts.post_id = likes.post_id")
+        .select("posts.*, IFNULL(replies.r_cnt, 0) AS r_cnt, IFNULL(likes.like_cnt, 0) AS like_cnt, IFNULL(replies.recent_dttm, posts.write_dttm) AS recent_dttm
                 , CASE WHEN posts.close_dttm < CURRENT_DATE THEN true ELSE false END AS closed")
         .order("post_id").reorder(order)
     return @posts
