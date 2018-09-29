@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   validates :content, presence: true
   belongs_to :forum
   has_many :replies
+  has_many :post_likes, dependent: :delete_all, foreign_key: "post_id"
 
   def forum_posts(forum_id, filter, order = nil)
     @posts = Post.where("posts.forum_id = ? AND posts.title like ?", forum_id, "%#{filter}%")

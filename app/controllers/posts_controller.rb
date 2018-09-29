@@ -23,9 +23,8 @@ class PostsController < ApplicationController
   def show
     # @current_forum = Forum.find_by_forum_id(@post.forum_id)
     # @parent_forum = Forum.find_by_forum_id(@current_forum.parent_forum_id)
-    @replies = Reply.reply_list(@post.post_id).page(params[:page]).per(params[:per_page])
-    @reply = Reply.new
-    @reply.post_id = @post.post_id
+    @replies = @post.replies.page(params[:page]).per(params[:per_page])
+    @reply = Reply.new(post_id: @post.post_id)
   end
 
   def edit
@@ -68,6 +67,13 @@ class PostsController < ApplicationController
     else
       redirect_to post_path(@post.post_id), alert: 'パスワードが一致しません。'
     end
+  end
+
+  def post_like
+    @post = Post.find(params[:id])
+    @post.like
+
+    redirect_to post_path(@post.post_id)
   end
 
   private

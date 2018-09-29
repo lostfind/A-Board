@@ -19,12 +19,19 @@ ActiveRecord::Schema.define(version: 2018_09_02_125517) do
     t.datetime "create_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
+  create_table "post_likes", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "post_id", default: 0, null: false
+    t.string "user_ip", limit: 100, default: "", null: false
+    t.index ["post_id", "user_ip"], name: "post_likes_IDX", unique: true
+  end
+
   create_table "posts", primary_key: "post_id", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "forum_id", null: false
     t.string "title", limit: 1000, null: false
     t.string "post_user_id", limit: 15, null: false
     t.string "password", limit: 100, null: false
     t.string "content", limit: 4000, null: false
+    t.decimal "like_cnt", precision: 10, default: "0", null: false
     t.datetime "write_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "modify_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.date "close_dttm"
@@ -39,6 +46,12 @@ ActiveRecord::Schema.define(version: 2018_09_02_125517) do
     t.string "content", limit: 4000, null: false
     t.datetime "write_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "modify_dttm", default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
+
+  create_table "reply_likes", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "reply_id", null: false
+    t.string "user_ip", limit: 100, null: false
+    t.index ["reply_id", "user_ip"], name: "reply_likes_IDX", unique: true
   end
 
 end

@@ -29,10 +29,12 @@
               <span class="time"><%= @post.write_dttm %></span>
             </div>
             <div class="osusume">
-              <a href="#">
-                <p class="t_right osu_icon">👍</p>
-                <p class="t_right">100000</p>
-              </a>
+              <% if PostLike.find_by( post_id: @post.post_id, user_ip: request.remote_ip ) %>
+                <%= link_to 'UNLIKE', "/posts/#{@post.post_id}/unlike", {method: 'post'} %>
+              <% else %>
+                <%= link_to 'LIKE', "/posts/#{@post.post_id}/like", {method: 'post'} %>
+              <% end %>
+              <span class="t_right"><%= @post.post_likes.count %></span>
             </div>
             <% unless @closed %>
               <div class="post_control">
@@ -66,10 +68,10 @@
           <li>
             <div class="reply_message">
                 <div class="reply_body">
-                  <% unless reply.quote_content.nil? %>
+                  <% unless reply.quote_reply_id.nil? %>
                     <div class="quote_content">
                       <p class="quote">引用 ></p>
-                      <%= reply.quote_content.html_safe %>
+                      <%= reply.quote.content.html_safe %>
                     </div>
                     <hr>
                   <% end %>
@@ -81,8 +83,12 @@
                 </div>
               <div class="osusume">
                 <a href="#">
-                  <p class="t_right osu_icon">♥</p>
-                  <p class="t_right">1000000</p>
+                  <% if ReplyLike.find_by( reply_id: reply.reply_id, user_ip: request.remote_ip ) %>
+                    <%= link_to '💔', "/replies/#{reply.reply_id}/unlike", {method: 'post'} %>
+                  <% else %>
+                    <%= link_to '♥', "/replies/#{reply.reply_id}/like", {method: 'post'} %>
+                  <% end %>
+                  <span class="t_right"><%= reply.reply_likes.count %></span>
                 </a>
               </div>
 
