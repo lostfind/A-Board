@@ -13,7 +13,7 @@ class RepliesController < ApplicationController
     if @reply.save
       redirect_to post_path(id: @reply.post_id), notice: 'コメントを登録しました。'
     else
-      redirect_to post_path(id: @reply.post_id)
+      redirect_to post_path(id: @reply.post_id), notice: 'コメント登録失敗しました。'
     end
   end
 
@@ -91,8 +91,5 @@ class RepliesController < ApplicationController
 
   def is_closed?
     return Post.find(@reply.post_id).is_closed?
-    # redirect_to post_path(@reply.post_id)
-    #   return true
-    # end
   end
 end
