@@ -5,7 +5,7 @@
 
 * クラウドIDE (goorm ide)
  　http://aboard.run.goorm.io
- 　http://52.78.39.226:58132 (ポートフォワーディングのURL)
+ 　http://52.78.39.226:55301 (ポートフォワーディングのURL)
   
   
 * Ruby version
