@@ -236,3 +236,17 @@ input.title {
 .like-btn-unlike {
     color: #ff0a97;
 }
+
+.l_over500, .l_over250, .l_over150 {
+    border-style: inset;
+    border-color: steelblue;
+}
+.l_over500 {
+    border-width: 5px;
+}
+.l_over250 {
+    border-width: 3px;
+}
+.l_over150 {
+    border-width: 2px;
+}

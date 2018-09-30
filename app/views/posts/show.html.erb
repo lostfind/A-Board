@@ -66,7 +66,18 @@
         <!-- Reply -->
         <% @replies.each do |reply| %>
           <li>
-            <div class="reply_message">
+            <%
+              if reply.reply_likes.count >= 500
+                @reply_like_class = 'l_over500'
+              elsif reply.reply_likes.count >= 250
+                @reply_like_class = 'l_over250'
+              elsif reply.reply_likes.count >= 150
+                @reply_like_class = 'l_over150'
+              else
+                @reply_like_class = ''
+              end
+            %>
+            <div class="reply_message <%= @reply_like_class %>">
                 <div class="reply_body">
                   <% unless reply.quote_reply_id.nil? %>
                     <div class="quote_content">
