@@ -3,9 +3,9 @@
 * 自宅のラズベリーパイサーバー
  　http://59.146.10.114:3000/
 
-* クラウドIDE (goorm ide)
- 　http://aboard.run.goorm.io
- 　http://52.78.39.226:57140/ (ポートフォワーディングのURL)
+* クラウドIDE (goorm ide) 現在利用不可
+　 http://aboard.run.goorm.io 現在利用不可
+ 　http:// (ポートフォワーディングのURL)
   
   
 * Ruby version
