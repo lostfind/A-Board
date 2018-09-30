@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* 自宅のラズベリーパイサーバー
+ 　http://59.146.10.114:3000/
 
-Things you may want to cover:
-
+* クラウドIDE (goorm ide)
+ 　http://aboard.run.goorm.io
+ 　http://52.78.39.226:58132 (ポートフォワーディングのURL)
+  
+  
 * Ruby version
     2.4.2
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
